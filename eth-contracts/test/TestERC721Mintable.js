@@ -73,7 +73,7 @@ contract('TestERC721Mintable', accounts => {
         })
 
         it('should return contract owner', async function () { 
-            let owner = await this.contract.getOwner();
+            let owner = await this.contract.owner();
             assert.equal(owner, account_one, "Invalid owner");
         })
 

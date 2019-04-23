@@ -16,7 +16,7 @@ contract Ownable {
 
 
     //  1) create a private '_owner' variable of type address with a public getter function
-    function getOwner() public view returns (address) {
+    function owner() public view returns (address) {
         return _owner;
     }
 
@@ -65,7 +65,7 @@ contract Pausable is Ownable {
     //  3) create an internal constructor that sets the _paused variable to false
     constructor () internal {
         _paused = false;
-        emit TransferOwnership(address(0), getOwner());
+        emit TransferOwnership(address(0), owner());
     }
 
 
@@ -193,7 +193,7 @@ contract ERC721 is Pausable, ERC165 {
         _tokenApprovals[tokenId] = to;
 
         // TODO emit Approval Event
-         emit Approval(getOwner(), to, tokenId);
+         emit Approval(owner(), to, tokenId);
 
     }
 
@@ -530,15 +530,15 @@ contract ERC721Metadata is ERC721Enumerable, usingOraclize {
 
     // TODO create external getter functions for name, symbol, and baseTokenURI
 
-    function getName() external view returns (string memory){
+    function name() external view returns (string memory){
         return _name;
     }
 
-    function getSymbol() external view returns (string memory){
+    function symbol() external view returns (string memory){
         return _symbol; 
     }
 
-    function getBaseTokenURI() external view returns (string memory){
+    function baseTokenURI() external view returns (string memory){
         return _baseTokenURI;
     }
 
