@@ -42,7 +42,9 @@ contract('TestERC721Mintable', accounts => {
         })
 
         it('should transfer token from one owner to another', async function () { 
-            await this.contract.transferFrom(account_one, account_two, 1);
+            let result = await this.contract.transferFrom(account_one, account_two, 1);
+            assert.equal("Transfer", result.logs[0].event, "Transfer event should have been emitted");
+
             let owner = await this.contract.ownerOf.call(1);
             assert.equal(owner, account_two, "Owner is invalid");
 
@@ -51,8 +53,6 @@ contract('TestERC721Mintable', accounts => {
 
             let tokenBalanceTwo = await this.contract.balanceOf.call(account_two);
             assert.equal(tokenBalanceTwo, 3, "Invalid token balance value for account_two");
-
-
         })
     });
 
