@@ -38,9 +38,72 @@ truffle test test/TestERC721Mintable.js
 truffle test test/TestSolnSquareVerifier.js
 ```
 
-# Mint
+# Zokrates (not required / optional
+
+Zokrates is used for generate/to change the verifier contract or generate proofs.
 
 
+#### Install Docker
+
+Instructions for installing it [here](https://docs.docker.com/install/).
+
+#### Run ZoKrates docker container:
+
+```
+docker run -v <path project folder>/zokrates/code:/home/zokrates/code -ti zokrates/zokrates:0.3.0 /bin/bash
+```
+
+#### Compile the program written in ZoKrates DSL 
+
+
+```
+cd code/square
+~/zokrates compile -i square.code
+```
+
+#### Generate the Trusted Setup
+
+```
+~/zokrates setup
+```
+
+#### Compute Witness
+
+```
+~/zokrates compute-witness -a <a> <b> ... <n>
+```
+
+#### Generate Proof
+
+```
+~/zokrates generate-proof
+```
+
+#### Export Verifier
+
+```
+~/zokrates export-verifier
+```
+
+# Minting
+
+There are a script for initial minting in the folder ``mint/mint.js`
+
+You should set this contract address and the address of your MetaMask account as environment variables when running the minting script.
+
+```
+export OWNER_ADDRESS="<my_address>"
+export NFT_CONTRACT_ADDRESS="<deployed_contract_address>"
+export MNEMONIC="<mnemonic>"
+export INFURA_KEY="<infura_key>"
+export NETWORK = "<network_id>"
+
+node mint.js
+```
+
+**References:**
+* https://docs.opensea.io/docs/1-structuring-your-smart-contract
+* https://github.com/ProjectOpenSea/opensea-creatures
 
 
 # Contract ABIs
